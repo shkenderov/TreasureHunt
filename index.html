@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AR.js</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+crossorigin=""/>
+<script type='text/javascript' src='dist/bundle.js' ></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+<style>
+	h1   {color: white;margin-top: 0;text-align: center; font-size: larger;}
+	h2   {color: white; font-size: large;}
+	h3   {color: white; font-size: medium}
+	label   {color: white;margin: 0; }
+
+	body{
+		font-family: Arial, Helvetica, sans-serif;
+		text-shadow: 2px 2px 8px black;
+	}
+	.menu{
+		background-size: cover;
+		background-position: top;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-image: url(./startBackground.jpg);	
+		background-color: black;
+		height: 400px;
+		overflow: scroll;
+	}
+	#in-game-menu{
+		height: 20vh;
+		width: 100%;
+		background-color: black;
+
+	}
+
+	
+	/* CSS */
+	.button-1 {
+		width: 100px;
+		height: 30px;
+		background-color: white;
+		border: 1px solid black;
+		color: black;
+		margin-top:5px;
+		margin-right:5px;
+
+	}
+
+	.button-1:hover{
+		cursor: pointer;
+		background-color: black;
+		border: 1px solid white;
+		color: white;
+	}
+	.button-1:focus {
+		background-color: black;
+		border: 1px solid white;
+		color: white;
+	}
+		.warning{
+			color:red;
+		}
+		.success{
+			color:greenyellow;
+			font-size: small;
+		}
+		.pending{
+			color:orange
+		}
+
+
+		#form{
+		
+			padding: 5px;
+			width: 100%;
+			
+		}
+
+	</style>
+</head>
+<body >
+	<div id="endScreen" class="menu" style="display: none;height: 100vh;width: 100%;background-color: black;">
+		
+	
+	</div>
+
+<div id="menu" class="menu" style="height: 100vh;width: 100%;background-color: black;">
+	<h1>WELCOME TO THE TREASURE HUNT GAME</h1>
+	<div id="map1"  style=" width:100%; height:350px"> </div>
+
+		<div id="form"  >
+			<h2>Nickname:</h2>
+			<input  type="text" id="name" name="name"><br>
+			<button  id="load" class="button-1" >Load Game</button>
+			<label for="membership">Choose a difficulty:</label>
+			<select name="difficulty" id="difficulty">
+				<option value="beginner"selected>Beginner</option>
+				<option value="easy">Easy</option>
+				<option value="medium" >Medium</option>
+				<option value="hard">Hard</option>
+			</select>
+			<button class="button-1" id="startBtn" >Start</button>
+			<button class="button-1" id="reset" >Reset</button>
+			<button class="button-1" id="clear" >Clear Database</button>
+
+			<div style="width:100%; height:fit-content">
+			<div id="clue1Wrapper" style="width:200px; float: left;margin-top: 50px;">
+				<h3 id="clue1LocLbl">Clue 1 Location: </h3>
+				
+				<label for="clue1Txt">Clue Text:</h4>
+				<input type="text" id="clue1Txt" ><br>
+				<button class="button-1" id="clue1Loc" >Set</button><br>
+			</div>
+		
+			<div id="clue2Wrapper" style="display: none;width:200px;float: left;margin-top: 50px;">
+				<h3 id="clue2LocLbl">Clue 2 Location: </h3>
+				<label for="clue2Txt">Clue Text:</h4>
+					<input type="text" id="clue2Txt"><br>
+				<button class="button-1" id="clue2Loc" >Set</button><br>
+			</div>
+
+			<div id="clue3Wrapper" style="display: none;width:200px;float: left;margin-top: 50px;">
+				<h3 id="clue3LocLbl">Clue 3 Location: </h3>
+				<label for="clue3Txt">Clue Text:</h4>
+
+				<input type="text" id="clue3Txt"><br>
+				<button class="button-1" id="clue3Loc" >Set</button><br>
+			</div>
+
+			<div id="TreasureWrapper" style="display: none;width:200px;float: left;margin-top: 50px;">
+				<h3 id="treasureLocLbl">Treasure Location: </h3>
+				<button class="button-1" id="trasureLoc" >Set</button><br>
+			</div>
+	</div>
+			
+		</div>
+
+
+
+</div>
+
+<div id="in-game-menu">
+	<button class="button-1" role="button">Cheat 1</button>
+	<button class="button-1" role="button">Cheat 2</button>
+</div>
+<a-scene scene width="80vh" style="visibility: hidden;" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true' >
+	
+
+	<a-camera gps-projected-camera rotation-reader camera >
+		<a-box id="navbox"  material='color: white' scale='0.5 0.5 0.5' position='0 2 -3'></a-box>
+
+	</a-camera>
+	<!--<a-entity terrarium-dem='zoom: 12; url: https://hikar.org/webapp/dem/{z}/{x}/{y}.png' osm3d='url: https://hikar.org/webapp/map/{z}/{x}/{y}.json?outProj=4326' peakfinder></a-entity>-->
+	<a-box  id="box"  material='color: red' scale='1 1 1' startbox></a-box>
+	<a-entity  id="text1" text='value: Hello World; align :center' scale='100 100 100' look-at='[camera]'></a-entity>
+
+
+	<a-box visible="false" id="box2" material='color: red' scale='1 1 1' ></a-box>
+	<a-entity id="text2" text='value: Hello World; align :center' scale='100 100 100' look-at='[camera]'></a-entity>
+
+	<a-box visible="false" id="box3"  material='color: red' scale='1 1 1' ></a-box>
+	<a-entity  id="text3" text='value: Hello World; align :center' scale='100 100 100' look-at='[camera]'></a-entity>
+
+	<a-box visible="false" id="box4"  material='color: green' scale='1 1 1' ></a-box>
+
+	
+</a-scene>
+
+</body>
+</html>
