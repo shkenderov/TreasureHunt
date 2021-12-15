@@ -45,6 +45,30 @@ var sessions = [];
 var detectionRange;
 setTimeout(function() { 
 
+document.getElementById("in-game-menu").addEventListener('click',function(e){
+    if(e.target.id=="cheat1"){
+        detectionRange={
+            green:250,
+            yellow:200,
+            orange:150,
+            red:100,
+            reveal: 90,
+            difficulty:0.15
+
+        }
+    }
+    else if(e.target.id=="cheat2"){
+        document.getElementById('navbox').setAttribute('visible',true);
+        detectionRange={
+            difficulty:0.1
+        }
+    }
+    else if(e.target.id=='restart'){
+        location.reload();
+    }
+
+});
+
 function query(username){
     //DATABASE QUERY
     //const username = username;
@@ -69,10 +93,10 @@ function query(username){
             document.getElementById("clue2Loc").style.display="none";
             document.getElementById("clue3Loc").style.display="none";
             document.getElementById("trasureLoc").style.display="none";
-            document.getElementById('clue1LocLbl').innerHTML="<h3>Clue 1 Location:<span class='success'> Lat: "+e.target.result.clue1.lat+"</br> Lon: "+e.target.result.clue1.lon+"</span></h3>";
-            document.getElementById('clue2LocLbl').innerHTML="<h3>Clue 2 Location:<span class='success'> Lat: "+e.target.result.clue2.lat+"</br> Lon: "+e.target.result.clue2.lon+"</span></h3>";
-            document.getElementById('clue3LocLbl').innerHTML="<h3>Clue 3 Location:<span class='success'> Lat: "+e.target.result.clue3.lat+"</br> Lon: "+e.target.result.clue3.lon+"</span></h3>";
-            document.getElementById('treasureLocLbl').innerHTML="<h3>Treasure Location:<span class='success'> Lat: "+e.target.result.treasure.lat+"</br> Lon: "+e.target.result.treasure.lon+"</span></h3>";
+            document.getElementById('clue1LocLbl').innerHTML="<h3>Clue 1 Location:<span class='success'></br> Lat: "+e.target.result.clue1.lat+"</br> Lon: "+e.target.result.clue1.lon+"</span></h3>";
+            document.getElementById('clue2LocLbl').innerHTML="<h3>Clue 2 Location:<span class='success'></br> Lat: "+e.target.result.clue2.lat+"</br> Lon: "+e.target.result.clue2.lon+"</span></h3>";
+            document.getElementById('clue3LocLbl').innerHTML="<h3>Clue 3 Location:<span class='success'></br> Lat: "+e.target.result.clue3.lat+"</br> Lon: "+e.target.result.clue3.lon+"</span></h3>";
+            document.getElementById('treasureLocLbl').innerHTML="<h3>Treasure Location:<span class='success'></br> Lat: "+e.target.result.treasure.lat+"</br> Lon: "+e.target.result.treasure.lon+"</span></h3>";
             
             document.getElementById('clue1Txt').value=e.target.result.clue1.txt;
             document.getElementById('clue2Txt').value=e.target.result.clue2.txt;
@@ -138,8 +162,6 @@ function query(username){
                 
 //    map.setView([50.908,-1.4], 14);
 
-
-
 document.getElementById('form').addEventListener('click', function(e) {
     console.log(e.target.id);
     if(e.target.id=="load"){
@@ -163,7 +185,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 console.log(e.latlng);
                 clue1Marker.bindPopup("First Clue");
 
-                document.getElementById('clue1LocLbl').innerHTML="<h3>Clue 1 Location:</br><span class='success'> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
+                document.getElementById('clue1LocLbl').innerHTML="<h3>Clue 1 Location:</br><span class='success'></br> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
                 map.off("click");
                 console.log(clue1);
                 document.getElementById('clue2Wrapper').style.display="block";
@@ -189,7 +211,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 }
                 var clue2Marker=L.marker(e.latlng).addTo(map);
                 clue2Marker.bindPopup("Second Clue");
-                document.getElementById('clue2LocLbl').innerHTML="<h3>Clue 2 Location:</br><span class='success'> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
+                document.getElementById('clue2LocLbl').innerHTML="<h3>Clue 2 Location:</br><span class='success'></br>Lat: "+e.latlng.lat+"</br>Lon: "+e.latlng.lng+"</span></h3>";
                 map.off("click");
                 document.getElementById('clue3Wrapper').style.display="block";
 
@@ -215,7 +237,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 }
                 var clue3Marker=L.marker(e.latlng).addTo(map);
                 clue3Marker.bindPopup("Third Clue");
-                document.getElementById('clue3LocLbl').innerHTML="<h3>Clue 3 Location:</br><span class='success'> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
+                document.getElementById('clue3LocLbl').innerHTML="<h3>Clue 3 Location:</br><span class='success'> </br>Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
                 map.off("click");
                 document.getElementById('TreasureWrapper').style.display="block";
 
@@ -239,7 +261,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 }
                 var clue1Marker=L.marker(e.latlng).addTo(map);
                 clue1Marker.bindPopup("Treasure");
-                document.getElementById('treasureLocLbl').innerHTML="<h3>Treasure Location:</br> <span class='success'> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
+                document.getElementById('treasureLocLbl').innerHTML="<h3>Treasure Location:</br> <span class='success'></br>Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
 
               //  console.log(treasure);
                 map.off("click");
@@ -300,7 +322,7 @@ document.getElementById('form').addEventListener('click', function(e) {
         else{
             document.querySelector('a-scene').style.visibility="visible";
             document.querySelector('#menu').style.visibility="hidden";
-
+            document.getElementById("in-game-menu").style.display="block";
             //const username=document.getElementById("name").ariaValueMax;
         // const transaction = db.transaction("");
         username=document.getElementById("name").value;
@@ -313,6 +335,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 orange:60,
                 red:30,
                 reveal: 15,
+                difficulty:0.25
             }
         }
         else if(difficulty=="beginner"){
@@ -322,6 +345,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                 orange:60,
                 red:30,
                 reveal: 15,
+                difficulty:0.5
+
             }
         }
         else if(difficulty=="medium"){
@@ -331,15 +356,18 @@ document.getElementById('form').addEventListener('click', function(e) {
                 orange:60,
                 red:30,
                 reveal: 15,
+                difficulty:1
             }
         }
         else if(difficulty=="hard"){
             detectionRange={
                 green:80,
                 yellow:60,
-                orange:40,
-                red:20,
-                reveal: 15,
+                orange:20,
+                red:5,
+                reveal: 1,
+                difficulty:3
+
             }
         }
             let tempObj={
@@ -368,18 +396,26 @@ document.getElementById('form').addEventListener('click', function(e) {
     );
 },500);
 
- 
+    function attachArrow(element){
+       nav= document.getElementById("navbox");
+       nav.setAttribute("visible",true);
+
+    }
 
     var ProgressFlag=0;
    
     var score=0;
-
+   var startTime;
     AFRAME.registerComponent('scene', {
       
-    tick: function(){
-
-       // console.log(detectionRange);
+    tick: function(totalTime){
         if(startGame==1){
+           startTime=totalTime;
+            startGame++;
+        }
+       // console.log(detectionRange);
+        if(startGame>0){
+
         /*const navBox=document.getElementById('navbox');
         navbox.setAttribute('position', {
             x: this.camera.getAttribute('position').x,
@@ -387,21 +423,29 @@ document.getElementById('form').addEventListener('click', function(e) {
             z: this.camera.getAttribute('position').z-5 // negate the northing!
         });*/
         const startBox = document.getElementById('box');
-       // console.log("PROGRESS: "+ProgressFlag);
         const [clue1Lat,clue1Lon] = this.merc.project(clue1.lon, clue1.lat);
 
         startBox.setAttribute('position', {
             x: clue1Lat,
-            y:0,
+            y:-5,
             z: -clue1Lon
          });
          const text1= document.getElementById('text1');
-
+        
          text1.setAttribute('position', {
-            x: clue1Lon,
-            y: 1,
-            z: -clue1Lat// negate the northing!
+            x: clue1Lat,
+            y: 1.5,
+            z: -clue1Lon// negate the northing!
         });
+        text1.setAttribute('text',{
+            value: clue1.txt,
+            align: 'center'
+        });
+       
+    
+        
+        
+
         //console.log(text1.getAttribute('position'));
 
             if(navigator.geolocation) {
@@ -412,15 +456,46 @@ document.getElementById('form').addEventListener('click', function(e) {
                             if(ProgressFlag==0) {
                                 //console.log(  startBox.getAttribute('position'));
 
+
+                                    //ARROW
+                                    var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box').getAttribute("position").x,2));
+                                    var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box').getAttribute("position").x)/hipotenuse;
+                                    var sinusDeg= sinus* (180/Math.PI);
+                                    //document.getElementById('navbox').setAttribute('visible',true);
+
+                                    document.getElementById('navbox').setAttribute('position',{
+                                        x:document.querySelector('a-camera').getAttribute("position").x,
+                                        y:0.5 ,
+                                        z:document.querySelector('a-camera').getAttribute("position").z
+                                    });
+
+                                    if(document.querySelector('#box').getAttribute("position").z<document.querySelector('a-camera').getAttribute("position").z){
+                                        document.getElementById('navbox').setAttribute('rotation',{
+                                            y:sinusDeg
+                                        });
+                                    }
+                                    else{
+                                        document.getElementById('navbox').setAttribute('rotation',{
+                                            y:180-sinusDeg
+                                        });
+                                    }
+
+
                                 if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs(  startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
                                    // console.log(startBox.getAttribute('position').x-this.camera.getAttribute('position').x);
-                                    score+=100;
+
+                                   document.getElementById("clue").innerHTML= "<p><b>Last Clue</b>: "+ clue1.txt +"</p>";
+
+
+
                                     const box2= document.getElementById('box2');
+                                 
+                                    const text2= document.getElementById('text2');
+
                                     const [clue2Lon,clue2Lat] = this.merc.project(clue2.lon, clue2.lat);
-                                    const text2= document.getElementById('text1');
                                     box2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: 0,
+                                        y: -5,
                                         z: -clue2Lat // negate the northing!
                                     });
                     
@@ -429,32 +504,53 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     });
                                     box2.setAttribute('geometry', {
                                         depth:"5",
-                                        height:"10",
+                                        height:"3",
                                         width:"7"
                                     });
-                                   
+                                    //console.log(text2.getAttribute('position'));
                                     text2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: 1,
+                                        y: 1.5,
                                         z: -clue2Lat// negate the northing!
                                     });
+                                   // console.log(text2.getAttribute('position'));
+                                    text2.setAttribute('text',{
+                                        value: clue2.txt,
+                                        align: 'center'
+                                    })
+
+                                    box2.setAttribute("visibile",false);
+
+                                    text2.setAttribute("visibile",false);
+
+
+                                  
+                                    
+
+
                                 ProgressFlag++;                            
                                 }
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'red',
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'red',
                                     });
+                                });
 
                                 }     
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.red&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.orange){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'orange',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'orange',
+                                    });
+                                });
                                 } 
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.orange&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.yellow){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'yellow',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'yellow',
+                                    });
+                                });
                                 }     
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.yellow&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.green){
                                     document.getElementById("navbox").setAttribute('material',{
@@ -468,18 +564,50 @@ document.getElementById('form').addEventListener('click', function(e) {
                                 }     
                             }
                                  if(ProgressFlag==1){
+
+                                      //ARROW
+                                      var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box2').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box2').getAttribute("position").x,2));
+                                      var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box2').getAttribute("position").x)/hipotenuse;
+                                      var sinusDeg= sinus* (180/Math.PI);
+                                      //document.getElementById('navbox').setAttribute('visible',true);
+  
+                                      document.getElementById('navbox').setAttribute('position',{
+                                          x:document.querySelector('a-camera').getAttribute("position").x,
+                                          y:0.5 ,
+                                          z:document.querySelector('a-camera').getAttribute("position").z
+                                      });
+                              
+                                      if(document.querySelector('#box2').getAttribute("position").z<document.querySelector('a-camera').getAttribute("position").z){
+                                          document.getElementById('navbox').setAttribute('rotation',{
+                                              y:sinusDeg
+                                          });
+                                      }
+                                      else{
+                                          document.getElementById('navbox').setAttribute('rotation',{
+                                              y:180-sinusDeg
+                                          });
+                                      }
+
+
+
                                     if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
                                         
-                                        const [clue3Lon,clue3Lat] = this.merc.project(clue3.lon, clue3.lat);
-                                        const text3= document.getElementById('text1');
+                                        document.getElementById("box2").setAttribute("visible",true);
+                                        document.getElementById("text2").setAttribute("visible",true);
+                                        document.getElementById("clue").innerHTML= "<p><b>Last Clue</b>: "+ clue2.txt +"</p>";
 
-                                        score+=100;
+
+                                        const [clue3Lon,clue3Lat] = this.merc.project(clue3.lon, clue3.lat);
+                                        const text3= document.getElementById('text3');
+
 
 
                                         const box3= document.getElementById('box3');
+
+
                                         box3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: 0,
+                                            y: -5,
                                             z: -clue3Lat // negate the northing!
                                         });
                                         box3.setAttribute('material', {
@@ -490,45 +618,92 @@ document.getElementById('form').addEventListener('click', function(e) {
                                             height:"5",
                                             width:"5"
                                         });
+                                        box3.setAttribute("visibile",false);
+
                                         text3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: 1,
+                                            y: 1.5,
                                             z: -clue3Lat// negate the northing!
                                         });
+                                        text3.setAttribute("visibile",false);
+
+                                        text3.setAttribute('text',{
+                                            value: clue3.txt,
+                                            align: 'center'
+                                        })
                                         ProgressFlag++;                           
 
                                 }
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'red',
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'red',
                                         });
+                                    });
                                         box2.setAttribute('visible',true);
 
                                     }     
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.red&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.orange){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'orange',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'orange',
+                                        });
+                                    });
                                     } 
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.orange&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.yellow){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'yellow',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'yellow',
+                                        });
+                                    });
                                     }     
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.yellow&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.green){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'green',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'green',
+                                        });
+                                    });
                                     }     
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.green){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'blue',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'blue',
+                                        });
+                                    });
                                     }     
                                 }
                                 if(ProgressFlag==2){
+                                    //ARROW
+                                    var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box3').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x,2));
+                                    var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x)/hipotenuse;
+                                    var sinusDeg= sinus* (180/Math.PI);
+                                    //document.getElementById('navbox').setAttribute('visible',true);
+
+                                    document.getElementById('navbox').setAttribute('position',{
+                                        x:document.querySelector('a-camera').getAttribute("position").x,
+                                        y:0.5 ,
+                                        z:document.querySelector('a-camera').getAttribute("position").z
+                                    });
+
+                                    if(document.querySelector('#box3').getAttribute("position").z<document.querySelector('a-camera').getAttribute("position").z){
+                                        document.getElementById('navbox').setAttribute('rotation',{
+                                            y:sinusDeg
+                                        });
+                                    }
+                                    else{
+                                        document.getElementById('navbox').setAttribute('rotation',{
+                                            y:180-sinusDeg
+                                        });
+ }
+                                    
+
+
                                     if(Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
-                                        score+=100;
+                                        document.getElementById("clue").innerHTML= "<p><b>Last Clue</b>: "+ clue3.txt +"</p>";
+
+                                        document.getElementById("box3").setAttribute("visible",true);
+                                        document.getElementById("text3").setAttribute("visible",true);
+
 
                                         const box4= document.getElementById('box4');
                                         const [tLong,tLat] = this.merc.project(treasure.lon, treasure.lat);
@@ -538,54 +713,95 @@ document.getElementById('form').addEventListener('click', function(e) {
                                             height:"5",
                                             width:"5"
                                         });
+                                        box4.setAttribute("visibile",false);
+
                                         box4.setAttribute('position', {
                                             x: tLong,
-                                            y: 0,
+                                            y: -5,
                                             z: -tLat // negate the northing!
                                         });
+
                                         ProgressFlag++;                           
 
 
                                 }
                                 else if(Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'red',
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'red',
                                     });
+                                });
+                                    
                                     box3.setAttribute('visible',true);
 
                                 }     
                                 else if(Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.red&&Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.orange){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'orange',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'orange',
+                                    });
+                                });
                                 } 
                                 else if(Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.orange&&Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.yellow){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'yellow',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'yellow',
+                                    });
+                                });
                                 }     
                                 else if(Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.yellow&&Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.green){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'green',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'green',
+                                    });
+                                });
                                 }     
                                 else if(Math.abs( box3.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box3.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.green){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'blue',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'blue',
+                                    });
+                                });
                                 }     
                                 }
                                 if(ProgressFlag==3){
+
+                                     //ARROW
+                                     var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box4').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x,2));
+                                     var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x)/hipotenuse;
+                                     var sinusDeg= sinus* (180/Math.PI);
+                                     //document.getElementById('navbox').setAttribute('visible',true);
+ 
+                                     document.getElementById('navbox').setAttribute('position',{
+                                         x:document.querySelector('a-camera').getAttribute("position").x,
+                                         y:0.5 ,
+                                         z:document.querySelector('a-camera').getAttribute("position").z
+                                     });
+                             
+                                     if(document.querySelector('#box4').getAttribute("position").z<document.querySelector('a-camera').getAttribute("position").z){
+                                         document.getElementById('navbox').setAttribute('rotation',{
+                                             y:sinusDeg
+                                         });
+                                     }
+                                     else{
+                                         document.getElementById('navbox').setAttribute('rotation',{
+                                             y:180-sinusDeg
+                                         });
+                                     }
                                     if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
-                                        document.querySelector('a-scene').style.visibility="hidden";
-                                        endScreen=document.querySelector('#endScreen');
-                                        endScreen.style.display="block";
+                                       // document.querySelector('a-scene').style.visibility="hidden";
+                                        document.getElementById("box4").setAttribute("visible",true);
+                                        endScreen=document.querySelector('#in-game-menu');
+                                        score=totalTime-startTime;
+                                        score=Math.round(10000000/score)*detectionRange.difficulty;
                                         endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
 
                                         document.getElementById("reload").addEventListener('click',function(){
                                             location.reload();
 
                                         });
+                                       // console.log(totalTime-this.startTime);
+                                       startGame=0;
                                         this.pause();
                                        // setTimeout(function() { 
                                          //   endScreen.style.display="none";
@@ -595,31 +811,41 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                     }
                                     else if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'red',
+                                            document.querySelectorAll(".arrowPart").forEach(function (el){
+                                                el.setAttribute('material',{
+                                                color:'red',
+                                            });
                                         });
                                         box4.setAttribute('visible',true);
 
                                     }     
                                     else if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.red&&Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.orange){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'orange',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'orange',
+                                        });
+                                    });
                                     } 
                                     else if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.orange&&Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.yellow){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'yellow',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'yellow',
+                                        });
+                                    });
                                     }     
                                     else if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.yellow&&Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.green){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'green',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'green',
+                                        });
+                                    });
                                     }     
                                     else if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.green){
-                                        document.getElementById("navbox").setAttribute('material',{
-                                            color:'blue',
-                                        })
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                             color:'blue',
+                                        });
+                                    });
                                     } 
                                 }
   
@@ -642,22 +868,14 @@ document.getElementById('form').addEventListener('click', function(e) {
     
     init: function() {
        
-        
-
+       
      
-        const startBox = document.getElementById('box');
 
         this.merc = new GoogleProjection();
         this.camera = document.querySelector('a-camera');
        
-        startBox.setAttribute('material', {
-            color: 'magenta'
-        });
-        startBox.setAttribute('geometry', {
-            depth:"5",
-             height:"5",
-              width:"5"
-        });
+       
+   
 
 
 
@@ -665,9 +883,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
         // Handle a GPS update ...
         window.addEventListener('gps-camera-update-position', e => {
-            console.log("HERE");
             const [camLon,camLat] = this.merc.project(e.detail.position.longitude, e.detail.position.latitude);
-            console.log(camLon,camLat);
            
 
 
@@ -676,30 +892,9 @@ document.getElementById('form').addEventListener('click', function(e) {
             // the camera entity
             document.querySelector('a-camera').setAttribute('position', {
                 x: camLon,
-                y: 0,
+                y: 3,
                 z: -camLat // negate the northing!
             });
-            console.log(  document.querySelector('a-camera').getAttribute('position'));
-
-              //  console.log(e.detail.position.longitude," ", e.detail.position.latitude);
-            
- 
-              
-   
-                //console.log( startBox.getAttribute('geometry'));
-
-            // Set the 'lat' and 'lon' attributes of the 'terrarium-dem'
-            // component to our current latitude and longitude. This will
-            // trigger a chain reaction of downloading first the DEM data, and
-            // then the OSM data
-            /*console.log('Calling terrarium dem..');
-            this.el.setAttribute('terrarium-dem', {
-                lat: e.detail.position.latitude,
-                lon: e.detail.position.longitude 
-            })*/
-
-
-            //console.log(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x));
 
         });
 
@@ -711,79 +906,6 @@ document.getElementById('form').addEventListener('click', function(e) {
 
 
         
-        /*
-        // This event will fire when the OSM data has been downloaded.
-        this.el.addEventListener('osm-data-loaded', e => {
-            // e.detail.pois contains GeoJSON data, as for last week.
-            // Filter the result to select only peaks.
-            e.detail.pois
-                .filter ( poi => poi.properties.natural == 'peak')
-                .forEach ( peak => {
-
-                    // Create entities for the text and cone, and also a
-                    // compound entity which will contain the text and cone.
-                    // It is the compound entity which will be positioned in
-                    // the world.
-                    const textEntity = document.createElement('a-text');
-                    const coneEntity = document.createElement('a-cone');
-                    const compoundEntity = document.createElement('a-entity');
-                    
-                    // set the elevation of the entity. This will be contained
-                    // within the GeoJSON geometry's 'coordinates' array, as the
-                    // third member. Units are in metres.
-                    // To do this set the y of the element's position to this
-                    // value from the GeoJSON.
-
-                    compoundEntity.setAttribute('position', {    
-                        x: 0,
-                        y: peak.geometry.coordinates[2],
-                        z: 0
-                    });
-
-                    // set the lat and lon of the compound entity by setting
-                    // its gps-projected-entity place component
-                    compoundEntity.setAttribute('gps-projected-entity-place', {
-                        latitude: peak.geometry.coordinates[1],
-                        longitude: peak.geometry.coordinates[0]
-                    });
-
-                    // Set the properties of the cone
-                    coneEntity.setAttribute('radius-bottom', 100);
-                    coneEntity.setAttribute('height', 300);
-                    coneEntity.setAttribute('material', {
-                        color: 'magenta'
-                    });
-            
-                    // Set the position of the cone relative to its parent
-                    // (the compound entity)
-                    coneEntity.setAttribute('position', {
-                        x: 0,
-                        y: 300,
-                        z: 0
-                    });
-    
-                    // Set the scale of the text
-                    textEntity.setAttribute('scale',  {
-                        x: 1000,
-                        y: 1000,
-                        z: 1000
-                    });
-                    // Make the text look-at the camera
-                    textEntity.setAttribute('look-at', '[gps-projected-camera]');
-
-    
-                    // Horizontally centre-align the text so the centre of the
-                    // text is placed at the parent entity's world position
-                    textEntity.setAttribute('align', 'center');
-                    textEntity.setAttribute('value', peak.properties.name || 'No name');
-
-                    // Add the text and cone to the compound entity
-                    compoundEntity.appendChild(textEntity);
-                    compoundEntity.appendChild(coneEntity);
-                    
-                    // Add the compound entity to the scene
-                    this.el.sceneEl.appendChild(compoundEntity);
-            });
-        });*/
+       
     }
 });

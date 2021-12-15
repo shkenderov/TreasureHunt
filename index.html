@@ -13,6 +13,8 @@ crossorigin=""></script>
 	h1   {color: white;margin-top: 0;text-align: center; font-size: larger;}
 	h2   {color: white; font-size: large;}
 	h3   {color: white; font-size: medium}
+	p   {color: white; font-size: small}
+
 	label   {color: white;margin: 0; }
 
 	body{
@@ -78,11 +80,18 @@ crossorigin=""></script>
 			width: 100%;
 			
 		}
-
+		#in-game-menu{
+			position: absolute;
+			width: 100%;
+			height:50px;
+			top:0;
+			left:0;
+			z-index: 999;
+		}
 	</style>
 </head>
 <body >
-	<div id="endScreen" class="menu" style="display: none;height: 100vh;width: 100%;background-color: black;">
+	<div id="endScreen" class="menu" style="display: none;height: 150px;width: 100%;background-color: black;">
 		
 	
 	</div>
@@ -107,7 +116,7 @@ crossorigin=""></script>
 			<button class="button-1" id="clear" >Clear Database</button>
 
 			<div style="width:100%; height:fit-content">
-			<div id="clue1Wrapper" style="width:200px; float: left;margin-top: 50px;">
+			<div id="clue1Wrapper" style="width:200px; margin-top: 50px;">
 				<h3 id="clue1LocLbl">Clue 1 Location: </h3>
 				
 				<label for="clue1Txt">Clue Text:</h4>
@@ -115,14 +124,14 @@ crossorigin=""></script>
 				<button class="button-1" id="clue1Loc" >Set</button><br>
 			</div>
 		
-			<div id="clue2Wrapper" style="display: none;width:200px;float: left;margin-top: 50px;">
+			<div id="clue2Wrapper" style="display: none;width:200px;margin-top: 50px;">
 				<h3 id="clue2LocLbl">Clue 2 Location: </h3>
 				<label for="clue2Txt">Clue Text:</h4>
 					<input type="text" id="clue2Txt"><br>
 				<button class="button-1" id="clue2Loc" >Set</button><br>
 			</div>
 
-			<div id="clue3Wrapper" style="display: none;width:200px;float: left;margin-top: 50px;">
+			<div id="clue3Wrapper" style="display: none;width:200px;margin-top: 50px;">
 				<h3 id="clue3LocLbl">Clue 3 Location: </h3>
 				<label for="clue3Txt">Clue Text:</h4>
 
@@ -130,7 +139,7 @@ crossorigin=""></script>
 				<button class="button-1" id="clue3Loc" >Set</button><br>
 			</div>
 
-			<div id="TreasureWrapper" style="display: none;width:200px;float: left;margin-top: 50px;">
+			<div id="TreasureWrapper" style="display: none;width:200px;margin-top: 50px;">
 				<h3 id="treasureLocLbl">Treasure Location: </h3>
 				<button class="button-1" id="trasureLoc" >Set</button><br>
 			</div>
@@ -142,29 +151,45 @@ crossorigin=""></script>
 
 </div>
 
-<div id="in-game-menu">
-	<button class="button-1" role="button">Cheat 1</button>
-	<button class="button-1" role="button">Cheat 2</button>
+<div id="in-game-menu" style="display: none;">
+	<span id="clue"></span>
+	<button class="button-1" id="cheat1" role="button">Cheat 1</button>
+	<button class="button-1" id="cheat2" role="button">Cheat 2</button>
+	<button class="button-1" id="restart" role="button">Restart</button>
+
 </div>
-<a-scene scene width="80vh" style="visibility: hidden;" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true' >
-	
+<a-scene scene style="visibility: hidden;" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true' >
+	<a-assets>
+		<a-asset-item src='./key_golem/scene.gltf' id="key"></a-asset-item>
+		<a-asset-item src='./chest/scene.gltf' id="chest"></a-asset-item>
+
+	</a-assets>
 
 	<a-camera gps-projected-camera rotation-reader camera >
-		<a-box id="navbox"  material='color: white' scale='0.5 0.5 0.5' position='0 2 -3'></a-box>
+		<a-sphere class="arrowPart"  scale="1 1 1"  position='0 3 -2.75'></a-sphere>
 
 	</a-camera>
-	<!--<a-entity terrarium-dem='zoom: 12; url: https://hikar.org/webapp/dem/{z}/{x}/{y}.png' osm3d='url: https://hikar.org/webapp/map/{z}/{x}/{y}.json?outProj=4326' peakfinder></a-entity>-->
-	<a-box  id="box"  material='color: red' scale='1 1 1' startbox></a-box>
-	<a-entity  id="text1" text='value: Hello World; align :center' scale='100 100 100' look-at='[camera]'></a-entity>
 
 
-	<a-box visible="false" id="box2" material='color: red' scale='1 1 1' ></a-box>
-	<a-entity id="text2" text='value: Hello World; align :center' scale='100 100 100' look-at='[camera]'></a-entity>
+	<a-entity visible="false" id="navbox" rotation='0 0 0'>
+		<a-box class="arrowPart"   material='color: white' scale="0.25 0.025 0.5" rotation='0 45 0' position='0.25 1 -3'></a-box>
+		<a-box  class="arrowPart" material='color: white'  scale="0.4 0.025 1"  position='0 1 -2.75'></a-box>
+		<a-box  class="arrowPart" material='color: white'  scale="0.25 0.025 0.5"  rotation='0 -45  0' position='-0.25 1 -3'></a-box>
 
-	<a-box visible="false" id="box3"  material='color: red' scale='1 1 1' ></a-box>
-	<a-entity  id="text3" text='value: Hello World; align :center' scale='100 100 100' look-at='[camera]'></a-entity>
+	</a-entity>
 
-	<a-box visible="false" id="box4"  material='color: green' scale='1 1 1' ></a-box>
+	
+	<a-entity gltf-model='#key' id="box"  scale='200 200 200 ' startbox></a-entity>
+	<a-entity  id="text1" scale='100 100 100' look-at='[camera]'></a-entity>
+
+
+	<a-entity visible="false" gltf-model='#key' id="box2"  scale='200 200 200 ' startbox></a-entity>
+	<a-entity visible="false" id="text2"  scale='100 100 100' look-at='[camera]'></a-entity>
+
+	<a-entity visible="false" gltf-model='#key' id="box3"  scale='200 200 200 ' startbox></a-entity>
+		<a-entity visible="false" id="text3"  scale='100 100 100' look-at='[camera]'></a-entity>
+
+		<a-entity visible="false" gltf-model='#chest' id="box4"  scale='20 20 20' startbox></a-entity>
 
 	
 </a-scene>
