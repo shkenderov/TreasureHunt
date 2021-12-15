@@ -60,11 +60,21 @@ document.getElementById("in-game-menu").addEventListener('click',function(e){
     else if(e.target.id=="cheat2"){
         document.getElementById('navbox').setAttribute('visible',true);
         detectionRange={
-            difficulty:0.1
+            green:80,
+            yellow:60,
+            orange:20,
+            red:5,
+            reveal: 1,
+            difficulty:3
+
         }
     }
     else if(e.target.id=='restart'){
         location.reload();
+    }
+    else if(e.target.id=="help2"){
+        document.getElementById("help-popover").style.display="block";
+        document.getElementById("helptxt").innerHTML="This is this: Walk around, watch out for items. At the top, you have the Locator. It changes color when you are getting closer and can help you a great lot! </br> At the top, you see the 2 cheats. The first will make the Locator more sensitive, and the second wil give you a navigating arrow. If you use them, your score will decrease. </br> </br>	  ";
     }
 
 });
@@ -161,12 +171,21 @@ function query(username){
                 { attribution: attrib } ).addTo(map);
                 
 //    map.setView([50.908,-1.4], 14);
+document.getElementById('help-popover').addEventListener('click', function(e) {
+    if(e.target.id=="closeHelp"){
+        document.getElementById('help-popover').style.display="none";
+    }
+});
 
 document.getElementById('form').addEventListener('click', function(e) {
     console.log(e.target.id);
     if(e.target.id=="load"){
         username=document.getElementById('name').value;
         query(username);
+    }
+    if(e.target.id=="help"){
+        document.getElementById('help-popover').style.display="block";
+
     }
     if(e.target.id=="clue1Loc"){
         if(document.getElementById('clue1Txt').value){
@@ -320,6 +339,7 @@ document.getElementById('form').addEventListener('click', function(e) {
             alert("Please input all clues and treasure");
         }
         else{
+            
             document.querySelector('a-scene').style.visibility="visible";
             document.querySelector('#menu').style.visibility="hidden";
             document.getElementById("in-game-menu").style.display="block";
@@ -396,11 +416,6 @@ document.getElementById('form').addEventListener('click', function(e) {
     );
 },500);
 
-    function attachArrow(element){
-       nav= document.getElementById("navbox");
-       nav.setAttribute("visible",true);
-
-    }
 
     var ProgressFlag=0;
    
@@ -427,14 +442,14 @@ document.getElementById('form').addEventListener('click', function(e) {
 
         startBox.setAttribute('position', {
             x: clue1Lat,
-            y:-5,
+            y:-8,
             z: -clue1Lon
          });
          const text1= document.getElementById('text1');
         
          text1.setAttribute('position', {
             x: clue1Lat,
-            y: 1.5,
+            y: 0,
             z: -clue1Lon// negate the northing!
         });
         text1.setAttribute('text',{
@@ -444,7 +459,8 @@ document.getElementById('form').addEventListener('click', function(e) {
        
     
         
-        
+       // console.log(detectionRange);
+
 
         //console.log(text1.getAttribute('position'));
 
@@ -482,10 +498,9 @@ document.getElementById('form').addEventListener('click', function(e) {
 
 
                                 if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs(  startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
-                                   // console.log(startBox.getAttribute('position').x-this.camera.getAttribute('position').x);
+                                // console.log(startBox.getAttribute('position').x-this.camera.getAttribute('position').x);
 
                                    document.getElementById("clue").innerHTML= "<p><b>Last Clue</b>: "+ clue1.txt +"</p>";
-
 
 
                                     const box2= document.getElementById('box2');
@@ -495,47 +510,31 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     const [clue2Lon,clue2Lat] = this.merc.project(clue2.lon, clue2.lat);
                                     box2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: -5,
+                                        y: -2,
                                         z: -clue2Lat // negate the northing!
                                     });
                     
-                                    box2.setAttribute('material', {
-                                        color: 'blue'
-                                    });
-                                    box2.setAttribute('geometry', {
-                                        depth:"5",
-                                        height:"3",
-                                        width:"7"
-                                    });
-                                    //console.log(text2.getAttribute('position'));
+                                 
                                     text2.setAttribute('position', {
                                         x: clue2Lon,
                                         y: 1.5,
                                         z: -clue2Lat// negate the northing!
                                     });
-                                   // console.log(text2.getAttribute('position'));
                                     text2.setAttribute('text',{
                                         value: clue2.txt,
                                         align: 'center'
                                     })
+                              
+                                
 
-                                    box2.setAttribute("visibile",false);
-
-                                    text2.setAttribute("visibile",false);
-
-
-                                  
-                                    
-
-
-                                ProgressFlag++;                            
-                                }
+                                    ProgressFlag++;                            
+                                    }
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
-                                    document.querySelectorAll(".arrowPart").forEach(function (el){
-                                        el.setAttribute('material',{
-                                         color:'red',
+                                        document.querySelectorAll(".arrowPart").forEach(function (el){
+                                            el.setAttribute('material',{
+                                            color:'red',
+                                        });
                                     });
-                                });
 
                                 }     
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.red&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.orange){
@@ -544,6 +543,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                          color:'orange',
                                     });
                                 });
+
                                 } 
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.orange&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.yellow){
                                     document.querySelectorAll(".arrowPart").forEach(function (el){
@@ -551,19 +551,27 @@ document.getElementById('form').addEventListener('click', function(e) {
                                          color:'yellow',
                                     });
                                 });
+
                                 }     
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.yellow&&Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.green){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'green',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'green',
+                                    });
+                                });
+
                                 }     
                                 else if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( startBox.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.green){
-                                    document.getElementById("navbox").setAttribute('material',{
-                                        color:'blue',
-                                    })
+                                    document.querySelectorAll(".arrowPart").forEach(function (el){
+                                        el.setAttribute('material',{
+                                         color:'blue',
+                                    });
+                                });
+
                                 }     
                             }
                                  if(ProgressFlag==1){
+
 
                                       //ARROW
                                       var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box2').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box2').getAttribute("position").x,2));
@@ -589,6 +597,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                       }
 
 
+                                     // console.log(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z));
 
                                     if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
                                         
@@ -607,7 +616,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         box3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: -5,
+                                            y: -2,
                                             z: -clue3Lat // negate the northing!
                                         });
                                         box3.setAttribute('material', {
@@ -635,12 +644,14 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                 }
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
+                                        //console.log("HERE");
+                                       
                                         document.querySelectorAll(".arrowPart").forEach(function (el){
                                             el.setAttribute('material',{
                                              color:'red',
                                         });
                                     });
-                                        box2.setAttribute('visible',true);
+
 
                                     }     
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.red&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.orange){
@@ -649,6 +660,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                              color:'orange',
                                         });
                                     });
+
                                     } 
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.orange&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.yellow){
                                         document.querySelectorAll(".arrowPart").forEach(function (el){
@@ -656,6 +668,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                              color:'yellow',
                                         });
                                     });
+
                                     }     
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.yellow&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.green){
                                         document.querySelectorAll(".arrowPart").forEach(function (el){
@@ -663,6 +676,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                              color:'green',
                                         });
                                     });
+
                                     }     
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>=detectionRange.green){
                                         document.querySelectorAll(".arrowPart").forEach(function (el){
@@ -670,9 +684,11 @@ document.getElementById('form').addEventListener('click', function(e) {
                                              color:'blue',
                                         });
                                     });
+
                                     }     
                                 }
                                 if(ProgressFlag==2){
+
                                     //ARROW
                                     var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box3').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x,2));
                                     var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x)/hipotenuse;
@@ -694,7 +710,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         document.getElementById('navbox').setAttribute('rotation',{
                                             y:180-sinusDeg
                                         });
- }
+                                    }
                                     
 
 
@@ -708,16 +724,12 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         const box4= document.getElementById('box4');
                                         const [tLong,tLat] = this.merc.project(treasure.lon, treasure.lat);
 
-                                        box4.setAttribute('geometry', {
-                                            depth:"5",
-                                            height:"5",
-                                            width:"5"
-                                        });
+                                    
                                         box4.setAttribute("visibile",false);
 
                                         box4.setAttribute('position', {
                                             x: tLong,
-                                            y: -5,
+                                            y: -2,
                                             z: -tLat // negate the northing!
                                         });
 
@@ -765,7 +777,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                 }     
                                 }
                                 if(ProgressFlag==3){
-
+                                    //console.log(box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z);
                                      //ARROW
                                      var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box4').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x,2));
                                      var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x)/hipotenuse;
@@ -875,7 +887,7 @@ document.getElementById('form').addEventListener('click', function(e) {
         this.camera = document.querySelector('a-camera');
        
        
-   
+        console.log("HERE");
 
 
 
@@ -885,14 +897,14 @@ document.getElementById('form').addEventListener('click', function(e) {
         window.addEventListener('gps-camera-update-position', e => {
             const [camLon,camLat] = this.merc.project(e.detail.position.longitude, e.detail.position.latitude);
            
-
+            
 
             // Set the camera's position to the current world position 
             // [camera] selects the entity with a 'camera' component, i.e.
             // the camera entity
             document.querySelector('a-camera').setAttribute('position', {
                 x: camLon,
-                y: 3,
+                y: 0,
                 z: -camLat // negate the northing!
             });
 

@@ -88,6 +88,16 @@ crossorigin=""></script>
 			left:0;
 			z-index: 999;
 		}
+		#help-popover{
+			position: absolute;
+			z-index:997;
+			width:400px;
+			height:fit-content;
+			background-color: black;
+			top:50px;
+			right:50px;
+			padding:5px;
+		}
 	</style>
 </head>
 <body >
@@ -96,8 +106,18 @@ crossorigin=""></script>
 	
 	</div>
 
+	<div id="help-popover"><h1>Instructions and help</h1>
+	<p id="helptxt"><b>Hello, wanderer! Welcome!</b></br> 
+		Please first enter your nickname. If you played a game with that nickname before, you can play it again.
+		If you want to create a new game, first type in a new hint where the next clue might be, then click "SET" and click on the map to set it.  Do this again and when you're ready press Start!</br>Choose your preffered difficulty. You can restart the game at any time and you can also delete the game history.
+	</br> <h1>If you don't see your first clue please refresh..</h1> </p>
+	</br>
+	<button  id="closeHelp" class="button-1" >Close</button>
+
+	</div>
+
 <div id="menu" class="menu" style="height: 100vh;width: 100%;background-color: black;">
-	<h1>WELCOME TO THE TREASURE HUNT GAME</h1>
+	<h1>WELCOME TO AR TREASURE ALPHA</h1>
 	<div id="map1"  style=" width:100%; height:350px"> </div>
 
 		<div id="form"  >
@@ -114,6 +134,7 @@ crossorigin=""></script>
 			<button class="button-1" id="startBtn" >Start</button>
 			<button class="button-1" id="reset" >Reset</button>
 			<button class="button-1" id="clear" >Clear Database</button>
+			<button class="button-1" id="help" role="button">Help</button>
 
 			<div style="width:100%; height:fit-content">
 			<div id="clue1Wrapper" style="width:200px; margin-top: 50px;">
@@ -152,17 +173,16 @@ crossorigin=""></script>
 </div>
 
 <div id="in-game-menu" style="display: none;">
-	<span id="clue"></span>
-	<button class="button-1" id="cheat1" role="button">Cheat 1</button>
-	<button class="button-1" id="cheat2" role="button">Cheat 2</button>
-	<button class="button-1" id="restart" role="button">Restart</button>
-
+	<div style="margin:0 10px;float: left;" id="clue"></div>
+	<button style="float: left;" class="button-1" id="cheat1" role="button">Cheat 1</button>
+	<button style="float: left;" class="button-1" id="cheat2" role="button">Cheat 2</button>
+	<button style="float: left;" class="button-1" id="restart" role="button">Restart</button>
+	<button style="float: left;" class="button-1" id="help2" role="button">Help</button>
 </div>
 <a-scene scene style="visibility: hidden;" arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true' >
 	<a-assets>
 		<a-asset-item src='./key_golem/scene.gltf' id="key"></a-asset-item>
 		<a-asset-item src='./chest/scene.gltf' id="chest"></a-asset-item>
-
 	</a-assets>
 
 	<a-camera gps-projected-camera rotation-reader camera >
@@ -172,16 +192,16 @@ crossorigin=""></script>
 
 
 	<a-entity visible="false" id="navbox" rotation='0 0 0'>
-		<a-box class="arrowPart"   material='color: white' scale="0.25 0.025 0.5" rotation='0 45 0' position='0.25 1 -3'></a-box>
-		<a-box  class="arrowPart" material='color: white'  scale="0.4 0.025 1"  position='0 1 -2.75'></a-box>
-		<a-box  class="arrowPart" material='color: white'  scale="0.25 0.025 0.5"  rotation='0 -45  0' position='-0.25 1 -3'></a-box>
+		<a-box class="arrowPart"   material='color: white' scale="0.25 0.025 0.5" rotation='0 45 0' position='0.25  0.75  -3'></a-box>
+		<a-box  class="arrowPart" material='color: white'  scale="0.4 0.025 1"  position='0  0.75  -2.75'></a-box>
+		<a-box  class="arrowPart" material='color: white'  scale="0.25 0.025 0.5"  rotation='0 -45  0' position='-0.25 0.75 -3'></a-box>
 
 	</a-entity>
 
-	
-	<a-entity gltf-model='#key' id="box"  scale='200 200 200 ' startbox></a-entity>
-	<a-entity  id="text1" scale='100 100 100' look-at='[camera]'></a-entity>
-
+	<a-entity>
+		<a-entity gltf-model='#key' id="box"  scale='150 150 150 ' startbox></a-entity>
+		<a-entity  id="text1" scale='100 100 100' look-at='[camera]'></a-entity>
+	</a-entity>
 
 	<a-entity visible="false" gltf-model='#key' id="box2"  scale='200 200 200 ' startbox></a-entity>
 	<a-entity visible="false" id="text2"  scale='100 100 100' look-at='[camera]'></a-entity>
