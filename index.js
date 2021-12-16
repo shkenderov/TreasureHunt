@@ -322,7 +322,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 yellow:100,
                 orange:90,
                 red:70,
-                reveal: 25,
+                reveal: 30,
                 difficulty:0.25
             }
         }
@@ -342,8 +342,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                 green:100,
                 yellow:80,
                 orange:60,
-                red:30,
-                reveal: 20,
+                red:50,
+                reveal: 30,
                 difficulty:1
             }
         }
@@ -351,9 +351,9 @@ document.getElementById('form').addEventListener('click', function(e) {
             detectionRange={
                 green:80,
                 yellow:60,
-                orange:20,
-                red:30,
-                reveal: 15,
+                orange:45,
+                red:40,
+                reveal: 30,
                 difficulty:3
 
             }
@@ -773,9 +773,9 @@ document.getElementById('form').addEventListener('click', function(e) {
                                        // document.querySelector('a-scene').style.visibility="hidden";
                                         document.getElementById("box4").setAttribute("visible",true);
                                         endScreen=document.querySelector('#in-game-menu');
-                                        //score=totalTime-startTime;
-                                        //score=Math.round(10000000/score)*detectionRange.difficulty;
-					                    score=100;
+                                        score=totalTime-startTime;
+                                        score=Math.round(10000000/score)*detectionRange.difficulty;
+					                    //score=100;
                                         endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
                                         document.getElementById("reload").addEventListener('click',function(){
                                             location.reload();
