@@ -773,7 +773,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         document.getElementById("box4").setAttribute("visible",true);
                                         endScreen=document.querySelector('#in-game-menu');
                                         score=totalTime-startTime;
-                                        score=Math.round(10000000/score)*detectionRange.difficulty;
+                                        //score=Math.round(10000000/score)*detectionRange.difficulty;
                                         endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
                                         alert("You finished the game! Your score is: "+score);
                                         document.getElementById("reload").addEventListener('click',function(){
