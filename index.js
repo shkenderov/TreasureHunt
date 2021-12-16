@@ -26,7 +26,7 @@ request.onsuccess = function(e) {
     db = e.target.result;
 }
 request.onerror = function(e) {
-    // Imagine console.log() is a function which fills a div with content
+    // Imagine //console.log() is a function which fills a div with content
     console.log("Error opening database: " + e.target.errorCode);
 }
 
@@ -57,7 +57,7 @@ function query(username){
     request.onsuccess =  e => {
         if(e.target.result) {
             //alert(e.target.result.username+" "+e.target.result.lat1+" "+e.target.result.lon1+" "+e.target.result.lat2+" "+e.target.result.lon2+" "+e.target.result.lat3+" "+e.target.result.lon3);
-            console.log(e.target.result);
+            //console.log(e.target.result);
             clue1=e.target.result.clue1;
             clue2=e.target.result.clue2;
             clue3=e.target.result.clue3;
@@ -147,7 +147,7 @@ document.getElementById('help-popover').addEventListener('click', function(e) {
 });
     
 document.getElementById('form').addEventListener('click', function(e) {
-    console.log(e.target.id);
+    //console.log(e.target.id);
     if(e.target.id=="load"){
         username=document.getElementById('name').value;
         query(username);
@@ -174,7 +174,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                 document.getElementById('clue1LocLbl').innerHTML="<h3>Clue 1 Location:</br><span class='success'></br> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
                 map.off("click");
-                console.log(clue1);
+                //console.log(clue1);
                 document.getElementById('clue2Wrapper').style.display="block";
 
             });
@@ -202,7 +202,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 map.off("click");
                 document.getElementById('clue3Wrapper').style.display="block";
 
-                console.log(clue2);
+                //console.log(clue2);
             });
 
         }
@@ -228,7 +228,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 map.off("click");
                 document.getElementById('TreasureWrapper').style.display="block";
 
-                console.log(clue3);
+                //console.log(clue3);
             });
 
         }
@@ -250,7 +250,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                 clue1Marker.bindPopup("Treasure");
                 document.getElementById('treasureLocLbl').innerHTML="<h3>Treasure Location:</br> <span class='success'></br>Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
 
-              //  console.log(treasure);
+              //  //console.log(treasure);
                 map.off("click");
             });
 
@@ -275,7 +275,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
         objectStoreRequest.onsuccess = function(event) {
             // report the success of our request
-            console.log("request to clear database successful");
+            //console.log("request to clear database successful");
         };
     }
     else if(e.target.id=="reset"){
@@ -396,7 +396,7 @@ document.getElementById('form').addEventListener('click', function(e) {
            startTime=totalTime;
             startGame++;
         }
-       // console.log(detectionRange);
+       // //console.log(detectionRange);
         if(startGame>0){
 
         /*const navBox=document.getElementById('navbox');
@@ -427,10 +427,10 @@ document.getElementById('form').addEventListener('click', function(e) {
        
     
         
-       // console.log(detectionRange);
+       // //console.log(detectionRange);
 
 
-        //console.log(text1.getAttribute('position'));
+        ////console.log(text1.getAttribute('position'));
 
             if(navigator.geolocation) {
                 
@@ -438,7 +438,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                     
                         //gpspos=> {
                             if(ProgressFlag==0) {
-                                //console.log(  startBox.getAttribute('position'));
+                                ////console.log(  startBox.getAttribute('position'));
 
 
                                     //ARROW
@@ -466,7 +466,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
 
                                 if(Math.abs( startBox.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs(  startBox.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
-                                // console.log(startBox.getAttribute('position').x-this.camera.getAttribute('position').x);
+                                // //console.log(startBox.getAttribute('position').x-this.camera.getAttribute('position').x);
 
                                    document.getElementById("clue").innerHTML= "<p><b>Last Clue</b>: "+ clue1.txt +"</p>";
 
@@ -565,7 +565,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                       }
 
 
-                                     // console.log(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z));
+                                     // //console.log(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z));
 
                                     if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
                                         
@@ -612,7 +612,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                 }
                                     else if(Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)>detectionRange.reveal&&Math.abs( box2.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box2.getAttribute('position').z-this.camera.getAttribute('position').z)<detectionRange.red){
-                                        //console.log("HERE");
+                                        ////console.log("HERE");
                                        
                                         document.querySelectorAll(".arrowPart").forEach(function (el){
                                             el.setAttribute('material',{
@@ -745,8 +745,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                                 }     
                                 }
                                 if(ProgressFlag==3){
-                                    document.querySelector('#in-game-menu').innerHTML+="HERE";
-                                    //console.log(box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z);
+                                    //document.querySelector('#in-game-menu').innerHTML+="HERE";
+                                    ////console.log(box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z);
                                      //ARROW
                                      var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box4').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x,2));
                                      var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x)/hipotenuse;
@@ -780,7 +780,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         document.getElementById("reload").addEventListener('click',function(){
                                             location.reload();
                                         });
-                                       // console.log(totalTime-this.startTime);
+                                       // //console.log(totalTime-this.startTime);
                                        startGame=0;
                                        this.pause();
                                        // setTimeout(function() { 
@@ -830,7 +830,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                 }
   
                                
-                            //console.log(gpspos.coords.latitude);
+                            ////console.log(gpspos.coords.latitude);
                                 //2ND CLUE TESTING 
 
                         //},
@@ -888,7 +888,7 @@ document.getElementById('form').addEventListener('click', function(e) {
         this.camera = document.querySelector('a-camera');
        
        
-        console.log("HERE");
+        //console.log("HERE");
 
 
 
@@ -912,7 +912,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
         // This event will fire when the elevation of our current location is available from the DEM.
        // this.el.addEventListener('elevation-available', e => {
-        //    console.log(`Got ele: ${e.detail.elevation}`);
+        //    //console.log(`Got ele: ${e.detail.elevation}`);
         //    this.camera.object3D.position.y = e.detail.elevation + 1.6;
       //  });
 
