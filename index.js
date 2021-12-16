@@ -168,7 +168,6 @@ document.getElementById('form').addEventListener('click', function(e) {
                  
 
                 var clue1Marker=L.marker(e.latlng).addTo(map);
-                console.log(e.latlng);
                 clue1Marker.bindPopup("First Clue");
 
                 document.getElementById('clue1LocLbl').innerHTML="<h3>Clue 1 Location:</br><span class='success'></br> Lat: "+e.latlng.lat+"</br> Lon: "+e.latlng.lng+"</span></h3>";
