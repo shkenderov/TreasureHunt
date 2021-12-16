@@ -781,7 +781,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         });
                                        // console.log(totalTime-this.startTime);
                                        startGame=0;
-                                        //this.pause();
+                                        this.pause();
                                        // setTimeout(function() { 
                                          //   endScreen.style.display="none";
                                            // document.querySelector('#menu').style.visibility="visible";
