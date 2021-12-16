@@ -3,11 +3,21 @@ import 'aframe-look-at-component';
 import 'aframe-osm-3d';
 import 'leaflet';
 import { GoogleProjection } from 'jsfreemaplib';
-window.onload = () => {
+var startGame=0;
 
 //DATABASE INIT
+
+var clue1={};
+var clue2={};
+var clue3={};
+var treasure={};
+var username;
+var sessions = [];
+var detectionRange;
+setTimeout(() => {
+
+
 let db;
-let startGame=0;
 const indexedDB = window.indexedDB;
 let request = indexedDB.open("sessiondb", 1);
 
@@ -37,14 +47,6 @@ request.onupgradeneeded = e=> {
         objectStore.add(sessions[i]);
     };
 };
-var clue1={};
-var clue2={};
-var clue3={};
-var treasure={};
-var username;
-var sessions = [];
-var detectionRange;
-
 
 function query(username){
     //DATABASE QUERY
@@ -128,7 +130,7 @@ function query(username){
 
 //MAP
   
-
+        
     const map = L.map ("map1").locate({setView: true, maxZoom: 16});
 
     const attrib="Map data copyright OpenStreetMap contributors, Open Database Licence";
@@ -143,7 +145,7 @@ document.getElementById('help-popover').addEventListener('click', function(e) {
         document.getElementById('help-popover').style.display="none";
     }
 });
-
+    
 document.getElementById('form').addEventListener('click', function(e) {
     console.log(e.target.id);
     if(e.target.id=="load"){
@@ -316,20 +318,20 @@ document.getElementById('form').addEventListener('click', function(e) {
         var difficulty=document.getElementById("difficulty").value;
         if(difficulty=="easy"){
             detectionRange={
-                green:260,
-                yellow:230,
+                green:130,
+                yellow:100,
                 orange:90,
-                red:50,
-                reveal: 35,
+                red:70,
+                reveal: 25,
                 difficulty:0.25
             }
         }
         else if(difficulty=="beginner"){
             detectionRange={
-                green:300,
-                yellow:250,
-                orange:100,
-                red:45,
+                green:250,
+                yellow:200,
+                orange:150,
+                red:80,
                 reveal: 30,
                 difficulty:0.5
 
@@ -337,11 +339,11 @@ document.getElementById('form').addEventListener('click', function(e) {
         }
         else if(difficulty=="medium"){
             detectionRange={
-                green:150,
-                yellow:100,
-                orange:85,
-                red:45,
-                reveal: 30,
+                green:100,
+                yellow:80,
+                orange:60,
+                red:30,
+                reveal: 20,
                 difficulty:1
             }
         }
@@ -350,8 +352,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                 green:80,
                 yellow:60,
                 orange:20,
-                red:40,
-                reveal: 20,
+                red:30,
+                reveal: 15,
                 difficulty:3
 
             }
@@ -380,12 +382,12 @@ document.getElementById('form').addEventListener('click', function(e) {
         }
         
     );
-
-
+}, 500); 
 
     var ProgressFlag=0;
    
     var score=0;
+    
    var startTime;
     AFRAME.registerComponent('scene', {
       
@@ -654,8 +656,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     }     
                                 }
                                 if(ProgressFlag==2){
-                                   
-
+                                    //alert("progress flag 2");
                                     //ARROW
                                     var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box3').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x,2));
                                     var sinus=(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x)/hipotenuse;
@@ -744,6 +745,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                 }     
                                 }
                                 if(ProgressFlag==3){
+                                    document.querySelector('#in-game-menu').innerHTML+="HERE";
                                     //console.log(box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z);
                                      //ARROW
                                      var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box4').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x,2));
@@ -769,19 +771,18 @@ document.getElementById('form').addEventListener('click', function(e) {
                                      }
                                     if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
                                        // document.querySelector('a-scene').style.visibility="hidden";
-                                        //document.getElementById("box4").setAttribute("visible",true);
+                                        document.getElementById("box4").setAttribute("visible",true);
                                         endScreen=document.querySelector('#in-game-menu');
                                         //score=totalTime-startTime;
                                         //score=Math.round(10000000/score)*detectionRange.difficulty;
-                                        score=1000;
+					                    score=100;
                                         endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
                                         document.getElementById("reload").addEventListener('click',function(){
                                             location.reload();
-
                                         });
-                                        console.log(totalTime-this.startTime);
-                                        startGame=0;
-                                        this.pause();
+                                       // console.log(totalTime-this.startTime);
+                                       startGame=0;
+                                       this.pause();
                                        // setTimeout(function() { 
                                          //   endScreen.style.display="none";
                                            // document.querySelector('#menu').style.visibility="visible";
@@ -795,7 +796,6 @@ document.getElementById('form').addEventListener('click', function(e) {
                                                 color:'red',
                                             });
                                         });
-                                       
                                         box4.setAttribute('visible',true);
 
                                     }     
@@ -864,12 +864,12 @@ document.getElementById('form').addEventListener('click', function(e) {
             else if(e.target.id=="cheat2"){
                 document.getElementById('navbox').setAttribute('visible',true);
                 detectionRange={
-                    green:150,
-                    yellow:100,
-                    orange:80,
-                    red:60,
-                    reveal: 40,
-                    difficulty:0.1
+                    green:80,
+                    yellow:60,
+                    orange:20,
+                    red:30,
+                    reveal: 15,
+                    difficulty:3
 
                 }
             }
@@ -921,4 +921,3 @@ document.getElementById('form').addEventListener('click', function(e) {
        
     }
 });
-}
