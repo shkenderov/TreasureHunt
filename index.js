@@ -654,6 +654,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     }     
                                 }
                                 if(ProgressFlag==2){
+                                    alert("progress flag 2");
 
                                     //ARROW
                                     var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box3').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box3').getAttribute("position").x,2));
@@ -743,6 +744,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                 }     
                                 }
                                 if(ProgressFlag==3){
+                                    alert("progress flag 3");
                                     //console.log(box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z);
                                      //ARROW
                                      var hipotenuse=Math.sqrt( Math.pow(document.querySelector('a-camera').getAttribute("position").z-document.querySelector('#box4').getAttribute("position").z,2)+Math.pow(document.querySelector('a-camera').getAttribute("position").x-document.querySelector('#box4').getAttribute("position").x,2));
@@ -780,7 +782,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         });
                                        // console.log(totalTime-this.startTime);
                                        startGame=0;
-                                        this.pause();
+                                       // this.pause();
                                        // setTimeout(function() { 
                                          //   endScreen.style.display="none";
                                            // document.querySelector('#menu').style.visibility="visible";
