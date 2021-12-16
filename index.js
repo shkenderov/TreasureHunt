@@ -774,7 +774,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                         score=totalTime-startTime;
                                         score=Math.round(10000000/score)*detectionRange.difficulty;
                                         endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
-
+                                        alert("You finished the game! Your score is: "+score);
                                         document.getElementById("reload").addEventListener('click',function(){
                                             location.reload();
 
@@ -896,8 +896,7 @@ document.getElementById('form').addEventListener('click', function(e) {
         // Handle a GPS update ...
         window.addEventListener('gps-camera-update-position', e => {
             const [camLon,camLat] = this.merc.project(e.detail.position.longitude, e.detail.position.latitude);
-           
-            
+
 
             // Set the camera's position to the current world position 
             // [camera] selects the entity with a 'camera' component, i.e.
