@@ -408,7 +408,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
         startBox.setAttribute('position', {
             x: clue1Lat,
-            y:-8,
+            y:-3,
             z: -clue1Lon
          });
          const text1= document.getElementById('text1');
@@ -476,7 +476,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     const [clue2Lon,clue2Lat] = this.merc.project(clue2.lon, clue2.lat);
                                     box2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: -8,
+                                        y: -3,
                                         z: -clue2Lat // negate the northing!
                                     });
                     
@@ -582,7 +582,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         box3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: -8,
+                                            y: -3,
                                             z: -clue3Lat // negate the northing!
                                         });
                                         box3.setAttribute('material', {
@@ -695,7 +695,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         box4.setAttribute('position', {
                                             x: tLong,
-                                            y: -8,
+                                            y: -3,
                                             z: -tLat // negate the northing!
                                         });
 
