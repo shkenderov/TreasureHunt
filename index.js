@@ -45,39 +45,6 @@ var sessions = [];
 var detectionRange;
 setTimeout(function() { 
 
-document.getElementById("in-game-menu").addEventListener('click',function(e){
-    if(e.target.id=="cheat1"){
-        detectionRange={
-            green:250,
-            yellow:200,
-            orange:150,
-            red:100,
-            reveal: 90,
-            difficulty:0.15
-
-        }
-    }
-    else if(e.target.id=="cheat2"){
-        document.getElementById('navbox').setAttribute('visible',true);
-        detectionRange={
-            green:80,
-            yellow:60,
-            orange:20,
-            red:5,
-            reveal: 1,
-            difficulty:3
-
-        }
-    }
-    else if(e.target.id=='restart'){
-        location.reload();
-    }
-    else if(e.target.id=="help2"){
-        document.getElementById("help-popover").style.display="block";
-        document.getElementById("helptxt").innerHTML="This is this: Walk around, watch out for items. At the top, you have the Locator. It changes color when you are getting closer and can help you a great lot! </br> At the top, you see the 2 cheats. The first will make the Locator more sensitive, and the second wil give you a navigating arrow. If you use them, your score will decrease. </br> </br>	  ";
-    }
-
-});
 
 function query(username){
     //DATABASE QUERY
@@ -880,7 +847,40 @@ document.getElementById('form').addEventListener('click', function(e) {
     
     init: function() {
        
-       
+            
+        document.getElementById("in-game-menu").addEventListener('click',function(e){
+            if(e.target.id=="cheat1"){
+                detectionRange={
+                    green:250,
+                    yellow:200,
+                    orange:150,
+                    red:100,
+                    reveal: 90,
+                    difficulty:0.15
+
+                }
+            }
+            else if(e.target.id=="cheat2"){
+                document.getElementById('navbox').setAttribute('visible',true);
+                detectionRange={
+                    green:80,
+                    yellow:60,
+                    orange:20,
+                    red:5,
+                    reveal: 1,
+                    difficulty:3
+
+                }
+            }
+            else if(e.target.id=='restart'){
+                location.reload();
+            }
+            else if(e.target.id=="help2"){
+                document.getElementById("help-popover").style.display="block";
+                document.getElementById("helptxt").innerHTML="This is this: Walk around, watch out for items. At the top, you have the Locator. It changes color when you are getting closer and can help you a great lot! </br> At the top, you see the 2 cheats. The first will make the Locator more sensitive, and the second wil give you a navigating arrow. If you use them, your score will decrease. </br> </br>	  ";
+            }
+
+        });
      
 
         this.merc = new GoogleProjection();
