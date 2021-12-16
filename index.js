@@ -408,7 +408,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
         startBox.setAttribute('position', {
             x: clue1Lat,
-            y:-3,
+            y: 0,
             z: -clue1Lon
          });
          const text1= document.getElementById('text1');
