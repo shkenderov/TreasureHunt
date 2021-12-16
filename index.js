@@ -319,8 +319,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                 green:260,
                 yellow:230,
                 orange:90,
-                red:75,
-                reveal: 40,
+                red:50,
+                reveal: 35,
                 difficulty:0.25
             }
         }
@@ -329,8 +329,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                 green:300,
                 yellow:250,
                 orange:100,
-                red:80,
-                reveal: 50,
+                red:45,
+                reveal: 30,
                 difficulty:0.5
 
             }
@@ -340,8 +340,8 @@ document.getElementById('form').addEventListener('click', function(e) {
                 green:150,
                 yellow:100,
                 orange:85,
-                red:70,
-                reveal: 40,
+                red:45,
+                reveal: 30,
                 difficulty:1
             }
         }
@@ -770,17 +770,18 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     if(Math.abs( box4.getAttribute('position').x-this.camera.getAttribute('position').x)+Math.abs( box4.getAttribute('position').z-this.camera.getAttribute('position').z)<=detectionRange.reveal){
                                        // document.querySelector('a-scene').style.visibility="hidden";
                                         //document.getElementById("box4").setAttribute("visible",true);
-                                        //endScreen=document.querySelector('#in-game-menu');
+                                        endScreen=document.querySelector('#in-game-menu');
                                         //score=totalTime-startTime;
                                         //score=Math.round(10000000/score)*detectionRange.difficulty;
-                                        //endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
-                                       // document.getElementById("reload").addEventListener('click',function(){
-                                      //      location.reload();
+                                        score=1000;
+                                        endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
+                                        document.getElementById("reload").addEventListener('click',function(){
+                                            location.reload();
 
-                                       // });
-                                       // console.log(totalTime-this.startTime);
-                                       startGame=0;
-                                       // this.pause();
+                                        });
+                                        console.log(totalTime-this.startTime);
+                                        startGame=0;
+                                        this.pause();
                                        // setTimeout(function() { 
                                          //   endScreen.style.display="none";
                                            // document.querySelector('#menu').style.visibility="visible";
@@ -794,14 +795,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                                 color:'red',
                                             });
                                         });
-                                        score=Math.round(10000000/score)*detectionRange.difficulty;
-                                        endScreen=document.querySelector('#in-game-menu');
-
-                                        endScreen.innerHTML='<h1>Congratulations! You found the treasure! </br> Your score is: '+score+'</h1></br> <button  id="reload" class="button-1" >Restart game</button>';
-                                        document.getElementById("reload").addEventListener('click',function(){
-                                            location.reload();
-
-                                        });
+                                       
                                         box4.setAttribute('visible',true);
 
                                     }     
