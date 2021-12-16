@@ -3,6 +3,7 @@ import 'aframe-look-at-component';
 import 'aframe-osm-3d';
 import 'leaflet';
 import { GoogleProjection } from 'jsfreemaplib';
+window.onload = () => {
 
 //DATABASE INIT
 let db;
@@ -43,7 +44,6 @@ var treasure={};
 var username;
 var sessions = [];
 var detectionRange;
-setTimeout(function() { 
 
 
 function query(username){
@@ -380,7 +380,7 @@ document.getElementById('form').addEventListener('click', function(e) {
         }
         
     );
-},500);
+
 
 
     var ProgressFlag=0;
@@ -921,3 +921,4 @@ document.getElementById('form').addEventListener('click', function(e) {
        
     }
 });
+}
