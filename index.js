@@ -484,7 +484,7 @@ document.getElementById('form').addEventListener('click', function(e) {
                                  
                                     text2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: 0,
+                                        y: 1,
                                         z: -clue2Lat// negate the northing!
                                     });
                                     text2.setAttribute('text',{
@@ -598,7 +598,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         text3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: 0,
+                                            y: 1,
                                             z: -clue3Lat// negate the northing!
                                         });
                                         text3.setAttribute("visibile",false);
