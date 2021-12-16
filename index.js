@@ -477,14 +477,14 @@ document.getElementById('form').addEventListener('click', function(e) {
                                     const [clue2Lon,clue2Lat] = this.merc.project(clue2.lon, clue2.lat);
                                     box2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: -2,
+                                        y: -8,
                                         z: -clue2Lat // negate the northing!
                                     });
                     
                                  
                                     text2.setAttribute('position', {
                                         x: clue2Lon,
-                                        y: 1.5,
+                                        y: 0,
                                         z: -clue2Lat// negate the northing!
                                     });
                                     text2.setAttribute('text',{
@@ -583,7 +583,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         box3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: -2,
+                                            y: -8,
                                             z: -clue3Lat // negate the northing!
                                         });
                                         box3.setAttribute('material', {
@@ -598,7 +598,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         text3.setAttribute('position', {
                                             x: clue3Lon,
-                                            y: 1.5,
+                                            y: 0,
                                             z: -clue3Lat// negate the northing!
                                         });
                                         text3.setAttribute("visibile",false);
@@ -696,7 +696,7 @@ document.getElementById('form').addEventListener('click', function(e) {
 
                                         box4.setAttribute('position', {
                                             x: tLong,
-                                            y: -2,
+                                            y: -8,
                                             z: -tLat // negate the northing!
                                         });
 
