@@ -909,10 +909,10 @@ document.getElementById('form').addEventListener('click', function(e) {
         });
 
         // This event will fire when the elevation of our current location is available from the DEM.
-        this.el.addEventListener('elevation-available', e => {
-            console.log(`Got ele: ${e.detail.elevation}`);
-            this.camera.object3D.position.y = e.detail.elevation + 1.6;
-        });
+       // this.el.addEventListener('elevation-available', e => {
+        //    console.log(`Got ele: ${e.detail.elevation}`);
+        //    this.camera.object3D.position.y = e.detail.elevation + 1.6;
+      //  });
 
 
         
